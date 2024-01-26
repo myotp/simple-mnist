@@ -129,4 +129,25 @@ defmodule SimpleMnist.MNIST do
     |> File.read!()
     |> :zlib.gunzip()
   end
+
+  def train_model() do
+    Nx.global_default_backend(EXLA.Backend)
+
+    {train_images, train_labels} =
+      load("train-images-idx3-ubyte.gz", "train-labels-idx1-ubyte.gz")
+
+    IO.puts("Initializing parameters...\n")
+    params = init_random_params()
+
+    IO.puts("Wrap the training function in JIT")
+    fun = EXLA.jit(&update_with_averages/6)
+
+    IO.puts("Training MNIST for 10 epochs...\n\n")
+    final_params = train(fun, train_images, train_labels, params, epochs: 10)
+
+    IO.puts("Bring the parameters back from the device and print them")
+    final_params = Nx.backend_transfer(final_params)
+
+    final_params
+  end
 end

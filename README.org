@@ -15,8 +15,10 @@ SimpleMnist.Examples.Heatmap.demo2()
 SimpleMnist.Examples.Heatmap.demo_binary_to_heatmap()
 
 * Train
-final_params = SimpleMnist.Examples.MnistTrain.run_with_exla()
-SimpleMnist.Examples.MnistTrain.run_test(final_params)
+SimpleMnist.Examples.MnistTrain.run_with_exla()
+
+* Run test
+SimpleMnist.Examples.RunBot.run_test()
 
 * Phoenix
 cd assets

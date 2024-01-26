@@ -8,6 +8,7 @@ defmodule SimpleMnist.Application do
   @impl true
   def start(_type, _args) do
     children = [
+      SimpleMnist.MnistBot,
       SimpleMnistWeb.Telemetry,
       {DNSCluster, query: Application.get_env(:simple_mnist, :dns_cluster_query) || :ignore},
       {Phoenix.PubSub, name: SimpleMnist.PubSub},
