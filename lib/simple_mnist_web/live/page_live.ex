@@ -1,5 +1,6 @@
 defmodule SimpleMnistWeb.PageLive do
   use Phoenix.LiveView
+  alias SimpleMnist.MnistBot
 
   @impl Phoenix.LiveView
   def mount(_params, _session, socket) do
@@ -25,21 +26,27 @@ defmodule SimpleMnistWeb.PageLive do
 
     File.write!(path, Base.decode64!(raw))
 
-    # TODO: prediction
     mat = Evision.imread(path, flags: Evision.Constant.cv_IMREAD_GRAYSCALE())
     mat = Evision.resize(mat, {28, 28})
 
+    # heatmap
     Evision.Mat.to_nx(mat)
     |> Nx.reshape({1, 1, 28, 28})
     |> Nx.to_heatmap()
     |> IO.inspect(label: "heatmap")
 
-    IO.inspect(mat, label: "Evision result")
-    prediction = 88
+    # prediction
+    image =
+      Evision.Mat.to_nx(mat)
+      |> Nx.backend_transfer()
+      |> Nx.reshape({1, 28 * 28})
+      |> Nx.divide(255)
+      |> IO.inspect(label: "Evision image")
+
+    {:ok, result} = MnistBot.predict(image)
 
     File.rm!(path)
-
-    {:noreply, assign(socket, prediction: prediction)}
+    {:noreply, assign(socket, prediction: result)}
   end
 
   @impl Phoenix.LiveView

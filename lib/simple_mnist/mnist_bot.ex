@@ -4,6 +4,8 @@ defmodule SimpleMnist.MnistBot do
   use GenServer
 
   def predict(image) do
+    IO.inspect(Nx.shape(image), label: "Image tensor shape")
+    IO.inspect(image, label: "Predict image", limit: 2000)
     GenServer.call(__MODULE__, {:predict, image})
   end
 
@@ -19,7 +21,7 @@ defmodule SimpleMnist.MnistBot do
   @impl GenServer
   def handle_call({:predict, image}, _from, params) do
     tensor = MNIST.predict(params, image)
-    {:reply, {:ok, tensor}, params}
+    {:reply, {:ok, tensor_output_to_number(tensor)}, params}
   end
 
   @impl GenServer
@@ -27,5 +29,15 @@ defmodule SimpleMnist.MnistBot do
     IO.puts("#{inspect(self())} generating model")
     params = MNIST.train_model()
     {:noreply, params}
+  end
+
+  def tensor_output_to_number(tensor) do
+    tensor
+    |> Nx.to_flat_list()
+    |> IO.inspect(label: "Result tensor")
+    |> Enum.zip(0..9)
+    |> Enum.sort(:desc)
+    |> hd()
+    |> elem(1)
   end
 end

@@ -9,12 +9,7 @@ defmodule SimpleMnist.Examples.RunBot do
       label = Nx.slice_along_axis(labels, i, 1)
       {image, label}
 
-      {:ok, result_tensor} = MnistBot.predict(image)
-
-      result =
-        result_tensor
-        |> Nx.to_flat_list()
-        |> output_to_number()
+      {:ok, result} = MnistBot.predict(image)
 
       expected =
         label
