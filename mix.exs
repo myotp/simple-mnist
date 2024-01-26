@@ -46,7 +46,8 @@ defmodule SimpleMnist.MixProject do
       {:dns_cluster, "~> 0.1.1"},
       {:plug_cowboy, "~> 2.5"},
       {:nx, "~> 0.6.4"},
-      {:exla, "~> 0.6.4"}
+      {:exla, "~> 0.6.4"},
+      {:evision, "~> 0.1.28"}
     ]
   end
 

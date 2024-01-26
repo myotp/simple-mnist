@@ -20,6 +20,14 @@ SimpleMnist.Examples.MnistTrain.run_with_exla()
 * Run test
 SimpleMnist.Examples.RunBot.run_test()
 
+* npm
+cd assets
+npm install draw-on-canvas --save
+
+* Evision
+brew install tesseract
+mix deps.compile evision --force
+
 * Phoenix
 cd assets
 npm install
