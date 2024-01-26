@@ -11,7 +11,18 @@ SimpleMnist.Examples.MnistData.demo()
 
 * Heatmap
 SimpleMnist.Examples.Heatmap.demo()
+SimpleMnist.Examples.Heatmap.demo2()
 SimpleMnist.Examples.Heatmap.demo_binary_to_heatmap()
 
 * Train
-SimpleMnist.Examples.MnistTrain.run_with_exla()
+final_params = SimpleMnist.Examples.MnistTrain.run_with_exla()
+SimpleMnist.Examples.MnistTrain.run_test(final_params)
+
+* Phoenix
+cd assets
+npm install
+cd ..
+mix setup
+mix compile
+iex -S mix phx.server
+http://localhost:4000/
