@@ -26,6 +26,15 @@ defmodule SimpleMnistWeb.PageLive do
     File.write!(path, Base.decode64!(raw))
 
     # TODO: prediction
+    mat = Evision.imread(path, flags: Evision.Constant.cv_IMREAD_GRAYSCALE())
+    mat = Evision.resize(mat, {28, 28})
+
+    Evision.Mat.to_nx(mat)
+    |> Nx.reshape({1, 1, 28, 28})
+    |> Nx.to_heatmap()
+    |> IO.inspect(label: "heatmap")
+
+    IO.inspect(mat, label: "Evision result")
     prediction = 88
 
     File.rm!(path)
