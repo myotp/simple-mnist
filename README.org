@@ -8,3 +8,6 @@ wget https://storage.googleapis.com/cvdf-datasets/mnist/t10k-images-idx3-ubyte.g
 wget https://storage.googleapis.com/cvdf-datasets/mnist/t10k-labels-idx1-ubyte.gz
 
 SimpleMnist.Examples.MnistData.demo()
+
+* Heatmap
+SimpleMnist.Examples.Heatmap.demo()
