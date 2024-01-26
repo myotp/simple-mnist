@@ -11,3 +11,4 @@ SimpleMnist.Examples.MnistData.demo()
 
 * Heatmap
 SimpleMnist.Examples.Heatmap.demo()
+SimpleMnist.Examples.Heatmap.demo_binary_to_heatmap()
