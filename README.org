@@ -12,3 +12,6 @@ SimpleMnist.Examples.MnistData.demo()
 * Heatmap
 SimpleMnist.Examples.Heatmap.demo()
 SimpleMnist.Examples.Heatmap.demo_binary_to_heatmap()
+
+* Train
+SimpleMnist.Examples.MnistTrain.run_with_exla()
