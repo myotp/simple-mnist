@@ -31,6 +31,7 @@ defmodule SimpleMnist.MnistBot do
     {:noreply, params}
   end
 
+  # FIXME: use Nx.argmax/1 instead
   def tensor_output_to_number(tensor) do
     tensor
     |> Nx.to_flat_list()
